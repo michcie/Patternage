@@ -1,0 +1,76 @@
+{% extends "panel/crud.html.twig" %}
+{% trans_default_domain "panel" %}
+
+{% block filters %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label>Nazwa Użytkownika</label>
+                {{ form_widget(filterForm.username) }}
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                <label>SuperAdmin</label>
+                {{ form_widget(filterForm.superAdmin) }}
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                <label>Szukanie</label>
+                {{ form_widget(filterForm.search, {attr: {placeholder: "panel.none"}}) }}
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block tableHead %}
+    <th>{{ sortable('ID', 'e.id') }}</th>
+    <th>{{ sortable('Nazwa', 'e.username') }}</th>
+    <th>{{ sortable('Email', 'e.email') }}</th>
+{% endblock %}
+
+{% block tableRow %}
+    <td>{{ entity.id }}</td>
+    <td>
+        {#{{ dump(entity) }}#}
+        {% if entity.superAdmin %}
+            <a title="Super Admin" data-toggle="tooltip" data-placement="top">
+                <i class="fa fa-superpowers"></i>
+            </a>
+        {% endif %}
+        {{ entity.username }}
+    </td>
+    <td>{{ entity.email }}</td>
+{% endblock %}
+
+{% block rowActions %}
+    <a data-action="logs" data-ids="{{ entity.id }}" title="Logi konta"
+       data-toggle="tooltip" data-placement="top"
+       class="text-info js-data-action">
+        <i class="icon-doc"></i>
+    </a>
+    {{ parent() }}
+{% endblock %}
+
+{% block selectedActions %}
+
+    {{ parent() }}
+{% endblock %}
+
+{% block scripts %}
+    {{ parent() }}
+
+    <script type="text/javascript">
+        jsdata.actionHandler(function ($actionElement, $table, ids) {
+            var action = $actionElement.data('action');
+            var splittedIds = ids.split(',');
+            if (action === 'edit' && splittedIds.length == 1) {
+                var url = "{{ path('panel_user_edit', {id: 'XXXIDXXX'}) }}";
+                url = url.replace('XXXIDXXX', ids);
+                return url;
+            }
+        });
+    </script>
+{% endblock %}

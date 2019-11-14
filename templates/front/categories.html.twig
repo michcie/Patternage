@@ -1,0 +1,63 @@
+<div class="navbar-inner">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto text-center">
+                    <li class="nav-item active mr-lg-2 mb-lg-0 mb-2">
+                        <a class="nav-link" href="/">Home
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    {% for cat in categories if cat.navbar %}
+                        <li class="nav-item dropdown mr-lg-2 mb-lg-0 mb-2">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                               aria-haspopup="true" aria-expanded="false">
+                                {{ cat.name }}
+                            </a>
+                            <div class="dropdown-menu">
+                                <div class="agile_inner_drop_nav_info p-4">
+                                    <h5 class="mb-3">{{ cat.name }}</h5>
+                                    <div class="row">
+                                        {% for sub in cat.children %}
+                                            <div class="col-sm-6 multi-gd-img">
+                                                <ul class="multi-column-dropdown">
+                                                    <a class="cat"
+                                                       style="text-decoration: none"
+                                                       href="{{ path('front_category', {'category': sub.name}) }}"> {{ sub.name }}</a>
+                                                </ul>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    {% endfor %}
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        {% if app.token.user.superadmin %}
+                            <li class="nav-item">
+                                <a href="{{ path('panel_dashboard') }}" class="nav-link">
+                                    Administration Panel </a>
+                            </li>
+                        {% endif %}
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+    </div>
+</div>
+<style>
+    .cat {
+        color: black;
+        text-decoration: none;
+    }
+
+    .cat hover {
+        text-decoration: none;
+        color: #0c5460;
+    }
+</style>

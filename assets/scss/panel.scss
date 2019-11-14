@@ -1,0 +1,21 @@
+// custom fonts
+@import url('https://fonts.googleapis.com/css?family=Raleway:400,500,600');
+
+$headings-font-family: 'Raleway', sans-serif;
+$headings-font-weight: 600;
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+$font-family-sans-serif: 'Open Sans', sans-serif;
+
+// core ui + bootstrap
+@import "coreui";
+
+//@import "coreui";
+@import '~toastr/toastr';
+@import '~simple-line-icons/scss/simple-line-icons';
+@import '~quill/dist/quill.core';
+@import '~quill/dist/quill.snow';
+@import "~select2/src/scss/core";
+@import "~highcharts/css/highcharts.scss";
+@import '~slick-carousel/slick/slick.scss';
+@import '~slick-carousel/slick/slick-theme.scss';

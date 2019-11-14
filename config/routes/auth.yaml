@@ -1,0 +1,37 @@
+auth_login:
+  path: /auth/login/{type}
+  requirements:
+      type:  google|facebook|form
+  defaults:
+      type: form
+  controller: App\Controller\Auth\LoginController::login
+
+auth_oauth:
+  path:  /auth/redirectLogin/{type}
+  controller: App\Controller\Auth\LoginController::loginOauth
+  requirements:
+      type:  google|facebook
+
+auth_logout:
+  path: /auth/logout
+
+auth_register:
+  path:     /auth/register
+  controller: App\Controller\Auth\RegisterController::register
+
+auth_reset:
+  path:     /auth/resetPassword
+  controller: App\Controller\Auth\ResetPasswordController::resetPassword
+auth_reset_token:
+  path:     /auth/resetPassword/{email}/{token}
+  controller: App\Controller\Auth\ResetPasswordController::resetPasswordToken
+
+auth_email_confirmation:
+  path:     /auth/emailConfirmation/{email}/{token}
+  controller: App\Controller\Auth\EmailConfirmationController::emailConfirmToken
+
+auth_notFound:
+  path:     /auth/404
+  controller: App\Controller\Auth\ExceptionController::notFound
+  requirements:
+      type:  google|facebook

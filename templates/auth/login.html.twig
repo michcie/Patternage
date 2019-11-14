@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% trans_default_domain "auth" %}
+
+
+
+{% block content %}
+
+    <div class="container center-middle">
+        <div class="row justify-content-center mt-5">
+            <div class="col-lg-4 col-md-5 p-4">
+                <h1 class="mb-2">{{ 'auth.loginHeader'|trans }}</h1>
+                <p class="mb-2">{{ 'auth.loginHint2'|trans }}</p>
+
+                {% if error %}
+                    <div class="alert-danger alert">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
+
+                <form action="{{ path('auth_login') }}" method="post">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="icon-user"></i></span>
+                        </div>
+                        <input type="text" class="form-control" id="username"
+                               placeholder="{{ 'auth.emailOrLogin'|trans }}"
+                               name="_username" value="{{ last_username }}"/>
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="icon-lock"></i></span>
+                        </div>
+                        <input type="password" class="form-control"
+                               placeholder="{{ 'auth.password'|trans }}" id="password"
+                               name="_password"/>
+                    </div>
+
+                    <div class="input-group mb-4">
+                        <label for="remember_me">
+                            <input class="checkbox" type="checkbox" id="remember_me"
+                                   name="_remember_me"
+                                   checked/> {{ 'auth.rememberMeCheckbox'|trans }}
+                        </label>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-6">
+                            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                            <button type="submit"
+                                    class="btn btn-primary px-4">{{ 'auth.loginBtn'|trans }}</button>
+                        </div>
+                        <div class="col-6 text-right">
+                            <a href="{{ path('auth_reset', {'_target_path': app.request.query.get('_target_path')}) }}"
+                               class="btn btn-link px-0">{{ 'auth.forgottenPasswordLink'|trans }}</a>
+                        </div>
+                    </div>
+                </form>
+                <hr>
+                <p class="text-muted">{{ 'auth.loginHint1'|trans }}</p>
+                <span><a href="{{ path('auth_register', {'_target_path': app.request.query.get('_target_path')}) }}">{{ 'auth.registerLink'|trans }}</a></span>
+                <div class="text-right">
+                    <div class="mt-4">
+                        <a href="{{ path('auth_oauth', {'type': 'facebook', '_target_path': app.request.query.get('_target_path')}) }}"
+                           class="btn btn-lg btn-facebook d-block position-relative">
+                            <i style="left: 14px; top: 11px; font-size: 20px;"
+                               class="fa fa-facebook position-absolute"></i>
+                            <span style="font-size: 16px;">
+                                {{ 'auth.loginByFacebook'|trans }}
+                            </span>
+                        </a>
+                    </div>
+                    <div class="mt-1">
+                        <a href="{{ path('auth_oauth', {'type': 'google', '_target_path': app.request.query.get('_target_path')}) }}"
+                           class="btn btn-lg btn-google-plus d-block position-relative">
+                            <i style="left: 12px; top: 11px; font-size: 20px;"
+                               class="fa fa-google-plus position-absolute"></i>
+                            <span style="font-size: 16px;">
+                                {{ 'auth.loginByGoogle'|trans }}
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

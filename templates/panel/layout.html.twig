@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="">
+
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js"></script>
+    <style>
+        body > :not(.pace), body:before, body:after {
+            -webkit-transition: opacity .4s ease-in-out;
+            -moz-transition: opacity .4s ease-in-out;
+            -o-transition: opacity .4s ease-in-out;
+            -ms-transition: opacity .4s ease-in-out;
+            transition: opacity .4s ease-in-out;
+        }
+
+        body:not(.pace-done) > :not(.pace), body:not(.pace-done):before, body:not(.pace-done):after {
+            opacity: 0;
+        }
+    </style>
+
+    <link href="" rel="shortcut icon"/>
+    <meta property="og:image"
+          content=""/>
+
+    <link href="{{ asset('build/panel.css') }}" rel="stylesheet">
+</head>
+
+<body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show">
+
+{% include 'panel/_top_menu.html.twig' %}
+
+<div class="app-body">
+
+    {% include 'panel/_sidebar_menu.html.twig' %}
+
+    <!-- Main content -->
+    <main class="{% block main_class %}main{% endblock %}">
+
+
+        {% block content %}
+        {% endblock %}
+
+    </main>
+
+</div>
+
+<footer class="app-footer" style="margin-top: 16px;">
+    <span>
+        Copyright ©{{ "now"|date('Y') }} Patternage | Realizacja: Michał Cieślinśki & Szymon Zosgórnik
+    </span>
+</footer>
+
+<script src="{{ asset('build/panel.js') }}"></script>
+
+{% block scripts %}{% endblock %}
+{% if app.request.hasPreviousSession %}
+    <script type="text/javascript">
+        $(document).ready(function(){
+            {% for message in app.flashes('error') %}
+            toastr.error('{{ message }}');
+            {% endfor %}
+            {% for message in app.flashes('warning') %}
+            toastr.warning('{{ message }}');
+            {% endfor %}
+            {% for message in app.flashes('success') %}
+            toastr.success('{{ message }}');
+            {% endfor %}
+            {% for message in app.flashes('info') %}
+            toastr.info('{{ message }}');
+            {% endfor %}
+        });
+    </script>
+{% endif %}
+</body>
+</html>

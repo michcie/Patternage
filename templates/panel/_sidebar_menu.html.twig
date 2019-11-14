@@ -1,0 +1,36 @@
+{% trans_default_domain "panel" %}
+
+<div class="sidebar">
+    <nav class="sidebar-nav">
+        <ul class="nav">
+
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('front_index') }}">
+                    <i class="nav-icon fa fa-shopping-basket"></i> Shop
+                </a>
+            </li>
+
+
+            {% if app.token.user.superAdmin %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('panel_shop_category_list') }}"><i
+                                class="nav-icon fa fa-tags"></i> {% trans %}
+                           Category List{% endtrans %}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('panel_shop_product_list') }}"><i
+                                class="nav-icon icon-doc"></i> {% trans %}
+                           Product List{% endtrans %}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('panel_user_list') }}"><i
+                                class="nav-icon icon-people"></i> {% trans %}
+                           User List{% endtrans %}</a>
+                </li>
+            {% endif %}
+            <br>
+            {#po to zeby w chromie jak link pokazuje nie zaslanialo ostatniego itemu...#}
+        </ul>
+    </nav>
+</div>

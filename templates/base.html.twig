@@ -1,0 +1,117 @@
+<html>
+<head>
+    {% block head %}
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="author" content="">
+
+        <style>
+            body {
+                background: #060F1B;
+            }
+
+            body > :not(.pace), body:before, body:after {
+                -webkit-transition: opacity .4s ease-in-out;
+                -moz-transition: opacity .4s ease-in-out;
+                -o-transition: opacity .4s ease-in-out;
+                -ms-transition: opacity .4s ease-in-out;
+                transition: opacity .4s ease-in-out;
+            }
+
+            body:not(.pace-done) > :not(.pace), body:not(.pace-done):before, body:not(.pace-done):after {
+                opacity: 0;
+            }
+        </style>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js"></script>
+
+        <title>Patternage</title>
+        <meta property="og:title" content="Patternage"/>
+        <meta property="og:type" content="website"/>
+
+        <link href="{{ asset('build/images/favicon-cg.png') }}" rel="shortcut icon"/>
+
+        <meta property="og:image"
+              content="{{ app.request.getSchemeAndHttpHost() }}{{ asset('build/images/ogimage-cg.png') }}"/>
+
+        <meta property="og:description" content="Patternage"/>
+        <meta name="description" content="Patternage"/>
+        <meta name="keywords" content="Patternage"/>
+
+        <meta name="googlebot" content="index, follow"/>
+        <meta name="robots" content="index, follow"/>
+
+        <link href="{{ asset('build/shop.css') }}" rel="stylesheet">
+    {% endblock %}
+</head>
+<body class="app header-fixed front-cg">
+
+
+{% include 'top_menu.html.twig' %}
+<div class="app-body">
+    {% block content %}
+    {% endblock %}
+</div>
+
+<footer class="page-footer font-small blue pt-4">
+    <div class="container-fluid text-center text-md-left">
+        <div class="row">
+            <div class="col-md-6 mt-md-0 mt-3">
+                <h5 class="text-uppercase">Patternage</h5>
+                <p>“PATTERNAGE” – YOUR PATTERN, OUR PATRONAGE</p>
+
+            </div>
+            <hr class="clearfix w-100 d-md-none pb-3">
+            <div class="col-md-3 mb-md-0 mb-3">
+                <h5 class="text-uppercase">Links</h5>
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="#!">Link 1</a>
+                    </li>
+                    <li>
+                        <a href="#!">Link 4</a>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-copyright text-center py-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 text-center text-lg-left">
+                    Copyright ©{{ "now"|date('Y') }} Sklep.pl | Realizacja: Michał Cieśliński & Szymon Zosgórnik
+                </div>
+                <div class="col-lg-6 text-center text-lg-right">
+                    <a href="" target="_blank">Regulamin Serwisu</a>
+                    |
+                    <a href="" target="_blank">Prywatność</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<script src="{{ asset('build/shop.js') }}"></script>
+{#Configure notifactions :)#}
+<script type="text/javascript">
+    $(document).ready(function () {
+        {% for message in app.flashes('error') %}
+        toastr.error('{{ message }}');
+        {% endfor %}
+        {% for message in app.flashes('warning') %}
+        toastr.warning('{{ message }}');
+        {% endfor %}
+        {% for message in app.flashes('success') %}
+        toastr.success('{{ message }}');
+        {% endfor %}
+        {% for message in app.flashes('info') %}
+        toastr.info('{{ message }}');
+        {% endfor %}
+    });
+</script>
+{% block scripts %}{% endblock %}
+</body>
+</html>

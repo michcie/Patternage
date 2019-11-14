@@ -1,0 +1,50 @@
+# dashboard
+panel_dashboard:
+  path:     /panel
+  controller: App\Controller\Admin\MainController::dashboard
+
+
+# ShopCategory
+panel_shop_category_list:
+  path:     /panel/shop_category/list
+  controller: App\Controller\Admin\CategoryController::listAction
+panel_shop_category_edit:
+  path:     /panel/shop_category/{id}/edit
+  controller: App\Controller\Admin\CategoryController::editAction
+panel_shop_category_create:
+  path:     /panel/shop_category/create
+  controller: App\Controller\Admin\CategoryController::createAction
+panel_shop_category_delete:
+  path:     /panel/shop_category/delete
+  controller: App\Controller\Admin\CategoryController::deleteAction
+  methods: [POST]
+
+
+
+
+# ShopProduct
+panel_shop_product_list:
+  path:     /panel/shop_product/list
+  controller: App\Controller\Admin\ProductController::listAction
+panel_shop_product_edit:
+  path:     /panel/shop_product/{id}/edit
+  controller: App\Controller\Admin\ProductController::editAction
+panel_shop_product_create:
+  path:     /panel/shop_product/create
+  controller: App\Controller\Admin\ProductController::createAction
+panel_shop_product_delete:
+  path:     /panel/shop_product/delete
+  controller: App\Controller\Admin\ProductController::deleteAction
+  methods: [POST]
+
+  # user
+panel_user_list:
+  path:     /panel/user/list
+  controller: App\Controller\Admin\UsersController::listAction
+panel_user_edit:
+  path:     /panel/user/{id}/edit
+  controller: App\Controller\Admin\UsersController::editAction
+panel_user_delete:
+  path:     /panel/user/delete
+  controller: App\Controller\Admin\UsersController::deleteAction
+  methods: [POST]

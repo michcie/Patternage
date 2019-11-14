@@ -1,0 +1,43 @@
+<div class="header-bot">
+    <div class="container">
+        <div class="row header-mid">
+            <!-- logo -->
+            <div class="col-md-3 logo_agile">
+                <h1 class="text-center">
+                    <a href="{{ path("front_index") }}" class="font-weight-bold font-italic">
+                    </a>
+                </h1>
+            </div>
+            <div class="col-md-9 header mt-4 mb-md-0 mb-4">
+                <div class="row">
+                    <!-- search -->
+                    <div class="col-10">
+                        {{ form_start(filterForm) }}
+                        {% if filterForm.search is defined %}
+                            <div class="form-group col-md-10">
+                                {{ form_widget(filterForm.search, {attr: {placeholder: "Search Prodcut..."}}) }}
+                                {{ form_errors(filterForm.search) }}
+                                {{ form_widget(filterForm.confirm, {
+                                    'label': 'Search',
+                                    'attr': {'class': 'btn; btn-success'}
+                                }) }}
+                            </div>
+                        {% endif %}
+                        {{ form_end(filterForm) }}
+                    </div>
+                    <div class="col-2 top_nav_right text-center mt-sm-0 mt-2">
+                        <div class="wcart wcart2 cart cart box_1">
+                            <form action="#" method="post" class="last">
+                                <input type="hidden" name="cmd" value="_cart">
+                                <input type="hidden" name="display" value="1">
+                                <a class="btn view-cart-cart" href="{{ path("front_checkout") }}">
+                                    <i class="fa fa-shopping-basket" style="color: black" id="cartAmmount"></i>
+                                </a>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

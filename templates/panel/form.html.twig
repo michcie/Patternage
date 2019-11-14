@@ -1,0 +1,33 @@
+{% extends "panel/layout.html.twig" %}
+{% trans_default_domain "panel" %}
+
+{% do breadcrumb(title, path(listRoute)) %}
+{% do breadcrumb(subtitle) %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="animated fadeIn">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header">
+                            {% set breadcrumbs = breadcrumbs() %}
+                            <strong>{{ breadcrumbs|length - 1 > 0 ? (breadcrumbs[breadcrumbs|length - 2]).name : "" }}</strong>
+                            <small>{{ breadcrumbs|length > 0 ? (breadcrumbs|last).name : "Panel" }}</small>
+                        </div>
+                        <div class="card-body">
+                            {% block crud_form %}
+
+                            {% endblock crud_form %}
+                            {% block crud_form_required_info %}
+                                <div style="font-size: 0.9rem;">
+                                    <span style="color: red;">*</span> - pole wymagane
+                                </div>
+                            {% endblock crud_form_required_info %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

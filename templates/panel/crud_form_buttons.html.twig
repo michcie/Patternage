@@ -1,0 +1,21 @@
+{% trans_default_domain "panel" %}
+
+<div class="form-group">
+    <input id="js-goto-value" name="goto" type="hidden" value="">
+
+    {% if canWrite is defined and not canWrite %}
+        <button type="submit" data-goto="{{ path(listRoute) }}" class="btn-secondary btn js-goto">
+            Back to list
+        </button>
+    {% else %}
+        <button type="submit" class="btn-success btn js-goto">{{ 'panel.save'|trans }}</button>
+        <button type="submit" data-goto="{{ path(listRoute) }}" class="btn-success btn js-goto">
+            Save and back to list
+        </button>
+        {% if (action == "create" or action == "create_from") and createRoute is defined %}
+            <button type="submit" data-goto="{{ path(createRoute, {id: '%id%'}) }}" class="btn-success btn js-goto">
+                Save and Copy
+            </button>
+        {% endif %}
+    {% endif %}
+</div>

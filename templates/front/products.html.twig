@@ -1,0 +1,45 @@
+<div class="wrapper">
+    <div class="product-sec1 px-sm-4 px-3 py-sm-5  py-3 mb-4">
+        <h3 class="heading-tittle text-center font-italic">Products</h3>
+        <div class="row">
+            {% for entity in entities %}
+                <div class="col-md-4 product-men mt-5">
+                    <div class="men-pro-item simpleCart_shelfItem">
+                        <div class="men-thumb-item text-center">
+                            {% if entity.image %}
+                                <img src="{{ entity.image}}" alt="">
+                            {% else %}
+                                <img src="{{ asset("build/images/notFound.png") }}">
+                            {% endif %}
+                            <div class="men-cart-pro">
+                                <div class="inner-men-cart-pro">
+                                    <a href="{{ path('product', {id: entity.id}) }}" class="link-product-add-cart">Quick
+                                        View</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item-info-product text-center border-top mt-4">
+                            <h4 class="pt-1">
+                                <a href="{{ path('product', {id: entity.id}) }}">{{ entity.name }}</a>
+                            </h4>
+                            <div class="info-product-price my-2">
+                                <span class="item_price">${{ entity.price }}</span>
+                            </div>
+                            <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
+                                <a class="button cartBtn btn-{{ entity.quantity <= 0 ? "danger" : "primary" }}"
+                                   data-am="{{ entity.quantity }}"
+                                        {{ entity.quantity <=0 ? "disabled" : "" }}
+                                   data-id="{{ entity.id }} "> {{ entity.quantity > 0 ? "Add To Cart" : "Out of Stock" }}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="row">
+            <div class="col-md-12 mt-5">
+                {{ pagerfanta(entities, null, {'prev_message':'Poprzednia'|trans, 'next_message':'Następna'|trans}) }}
+            </div>
+        </div>
+    </div>
+</div>

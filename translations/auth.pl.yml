@@ -1,0 +1,38 @@
+auth.username: 'Login'
+auth.email: 'Email'
+auth.password: 'Hasło'
+auth.passwordRepeat: 'Powtórz hasło'
+auth.emailOrLogin: 'Login/Email'
+auth.rememberMeCheckbox: 'Zapamiętaj mnie!'
+
+auth.alreadyHaveAccountQuestion: 'Masz już konto?'
+auth.alreadyHaveAccountQuestionLogin: 'Zaloguj się'
+
+auth.forgottenPasswordLink: 'Zapomniane hasło?'
+auth.registerLink: 'Nie masz konta? Utwórz nowe!'
+
+
+auth.loggedInAs: 'Zalogowano jako: %user% (%email%)'
+auth.logout: 'Wyloguj'
+auth.registerHeader: 'Nowe konto'
+auth.registerHint1: 'Wypełnij poniższy formularz jeśli chcesz założyć konto w tradycyjny sposób:'
+auth.registerHint2: 'albo załóż konto bez trudu używając jednego z przycisków:'
+auth.registerBtn: 'Załóż nowe konto!'
+auth.registerByFacebook: 'Zarejestruj przez Facebook'
+auth.registerByGoogle: 'Zarejestruj przez Google'
+auth.registerSuccess: 'Zarejestrowano nowe konto! Możesz się teraz zalogować.'
+
+auth.passwordRepeatError: 'Hasła się różnią!'
+auth.resetPasswordRequestHeader: 'Resetowanie hasła'
+auth.resetPasswordRequestHint: 'Po wypełnieniu poniższego formularza na twojego emaila zostanie wysłany link do resetu hasła.'
+
+auth.resetPasswordRequestButton: 'Wyślij link do resetu hasła'
+auth.resetPasswordRequestAccountNotFound: 'Nie znaleziono konta pasującego do podanego adresu email'
+
+
+auth.loginHeader: 'Logowanie'
+auth.loginHint1: 'lub zaloguj się bez trudu z pomocą poniższych serwisów:'
+auth.loginHint2: 'Użyj standardowego fomularza logowania:'
+auth.loginBtn: 'Zaloguj'
+auth.loginByFacebook: 'Zaloguj przez Facebook'
+auth.loginByGoogle: 'Zaloguj przez Google'

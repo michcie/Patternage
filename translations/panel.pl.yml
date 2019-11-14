@@ -1,0 +1,22 @@
+panel.save: 'Zapisz'
+panel.form:
+  edit.username: 'Nazwa Użytkownika'
+  edit.email: 'Email'
+  edit.pass: 'Hasło'
+panel:
+  none: ''
+  yes: 'Tak'
+  no: 'Nie'
+  Name: 'Nazwa'
+  nav:
+    prev: 'Poprzednia'
+    next: 'Następna'
+  user:
+    name_plural: 'Użytkownicy'
+    edit: 'Edycja'
+  shop_category:
+    name_plural: 'Kategorie'
+    create: 'Dodaj nową'
+  shop_product:
+    name_plural: 'Produkty'
+    create: 'Dodaj nowy'

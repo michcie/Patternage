@@ -1,0 +1,97 @@
+{% extends "panel/crud.html.twig" %}
+{% trans_default_domain "panel" %}
+
+{% block headActions %}
+    <a style="margin-bottom: -3px;" class="btn btn-sm btn-primary pull-right"
+       href="{{ path('panel_shop_product_create') }}">
+        {{ 'panel.shop_product.create'|trans }}
+    </a>
+{% endblock %}
+
+{% block filters %}
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Nazwa</label>
+                {{ form_widget(filterForm.name) }}
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Producent</label>
+                {{ form_widget(filterForm.producent) }}
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Kategoria</label>
+                {{ form_widget(filterForm.category) }}
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                <label>Szukanie</label>
+                {{ form_widget(filterForm.search, {attr: {placeholder: "panel.none"}}) }}
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block tableHead %}
+    <th>{{ sortable('ID', 'e.id') }}</th>
+    <th>{{ sortable('Nazwa', 'e.name') }}</th>
+    <th>{{ sortable('Kategoria', 'e.category') }}</th>
+    <th>{{ sortable('Cena', 'e.price') }}</th>
+    <th>{{ sortable('Producent', 'e.producent') }}</th>
+    <th>{{ sortable('Ilość', 'e.quantity') }}</th>
+{% endblock %}
+
+{% block tableRow %}
+
+    <td>{{ entity.id }}</td>
+    <td>{{ entity.name }}</td>
+    <td>{{ entity.category }}</td>
+    <td>{{ entity.price }}</td>
+    <td>{{ entity.producent }}</td>
+    <td>{{ entity.quantity }}</td>
+{% endblock %}
+
+{% block rowActions %}
+    <a data-action="copy" data-ids="{{ entity.id }}" title="Kopiuj"
+       data-toggle="tooltip" data-placement="top"
+       class="text-info js-data-action">
+        <i class="fa fa-copy"></i>
+    </a>
+    {{ parent() }}
+{% endblock %}
+
+{% block selectedActions %}
+
+    {{ parent() }}
+{% endblock %}
+
+{% block scripts %}
+    {{ parent() }}
+
+    <script type="text/javascript">
+        jsdata.actionHandler(function ($actionElement, $table, ids) {
+            var action = $actionElement.data('action');
+            var splittedIds = ids.split(',');
+            if (action === 'edit' && splittedIds.length == 1) {
+                var url = "{{ path('panel_shop_product_edit', {id: 'XXXIDXXX'}) }}";
+                url = url.replace('XXXIDXXX', ids);
+                return url;
+            }
+        });
+        jsdata.actionHandler(function ($actionElement, $table, ids) {
+            var action = $actionElement.data('action');
+            var splittedIds = ids.split(',');
+            if (action === 'copy' && splittedIds.length == 1) {
+                var url = "{{ path('panel_shop_product_create', {id: 'XXXIDXXX'}) }}";
+                url = url.replace('XXXIDXXX', ids);
+                return url;
+            }
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,211 @@
+{% extends "panel/layout.html.twig" %}
+{% trans_default_domain "panel" %}
+
+{% do breadcrumb(title) %}
+
+{% block content %}
+
+    <div class="container-fluid">
+
+        {% if deleteForm %}
+            {{ form_start(deleteForm, {attr: {class: 'hidden'}}) }}
+            {{ form_widget(deleteForm) }}
+            {{ form_end(deleteForm) }}
+        {% endif %}
+
+        <div class="row">
+            {% block preList %}{% endblock %}
+
+            <div class="col-lg-12">
+                <div class="card">
+
+                    <div class="card-header">
+                        <strong>{{ (breadcrumbs()|last).name }}</strong>
+                        <small>(Strona: {{ entities.currentPage }},
+                            Rekordów: {{ entities.nbResults }})
+                        </small>
+                        {% block headActions %}{% endblock %}
+                    </div>
+
+                    <div class="card-body">
+
+                        {% block preFilterCardBody %}{% endblock %}
+
+                        {% block filterFormBody %}
+                            {{ form_start(filterForm) }}
+                            <div class="card">
+                                <div class="card-body">
+                                    {% block filters %}
+                                        {% if filterForm.search is defined %}
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="form-group">
+                                                        <label>Szukanie</label>
+                                                        {{ form_widget(filterForm.search, {attr: {placeholder: "panel.none"}}) }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    {% endblock %}
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <a href="?filter" class="filter-submit btn btn-secondary pull-left">
+                                                <i class="fa fa-remove"></i>&nbsp; Resetuj filtry
+                                            </a>
+                                            <button type="submit" class="filter-submit btn btn-primary pull-right">
+                                                <i class="fa fa-filter"></i>&nbsp; Zastosuj
+                                            </button>
+                                            <div style="width: 80px; float: right; margin-right: 16px;">
+                                                {{ form_widget(filterForm.perPage, {attr: {class: 'form-control'}}) }}
+                                            </div>
+                                            <div style="float: right; text-align: right; padding: 6px;">
+                                                Ilość na stronie:
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {{ form_end(filterForm) }}
+                        {% endblock %}
+
+                        {% block cardBody %}{% endblock %}
+
+                        {% block entitiesTable %}
+                            <table class="table data-table table-hover" id="list-data">
+
+                                <tr>
+                                    {% block selectBoxHead %}
+                                        <th style="width: 30px;">
+                                            <input data-toggle="tooltip" data-placement="right" title="Zaznacz wszystko"
+                                                   class="js-data-row-checkbox-all" type="checkbox">
+                                        </th>
+                                    {% endblock %}
+                                    {% block tableHead %}{% endblock %}
+                                    {% block tableHeadForActions %}
+                                        <th></th>
+                                    {% endblock %}
+                                </tr>
+
+                                {% for entity in entities %}
+                                    <tr class="js-data-row">
+                                        {% block selectBox %}
+                                            <td style="vertical-align: middle;">
+                                                <input data-id="{{ attribute(entity, primaryField) }}"
+                                                       class="js-data-row-checkbox"
+                                                       type="checkbox">
+                                            </td>
+                                        {% endblock %}
+                                        {% block tableRow %}
+                                        {% endblock %}
+
+                                        {% block tableRowForActions %}
+                                            <td style="text-align: right;" class="list-actions">
+                                                {% block rowActions %}
+                                                    <a data-action="edit"
+                                                       data-ids="{{ attribute(entity, primaryField) }}"
+                                                       title="Edycja"
+                                                       data-toggle="tooltip" data-placement="top"
+                                                       class="text-info js-data-action">
+                                                        <i class="fa fa-edit"></i>
+                                                    </a>
+
+                                                    {% if deleteForm %}
+                                                        <a data-action="delete"
+                                                           data-ids="{{ attribute(entity, primaryField) }}"
+                                                           title="Usuń"
+                                                           data-toggle="tooltip" data-placement="top"
+                                                           class="text-danger js-data-action">
+                                                            <i class="fa fa-trash-o"></i>
+                                                        </a>
+                                                    {% endif %}
+                                                {% endblock %}
+                                            </td>
+                                        {% endblock %}
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                        <td colspan="auto" class="text-center">
+                                            <span class="text-muted">
+                                                Brak rekordów pasujących do podanych kryteriów.
+                                            </span>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+
+                                {% block selectedActions_main %}
+                                    <tr class="js-data-row-actions">
+                                        <td class="text-muted"
+                                            colspan="auto">
+                                            Zaznaczone:
+                                            <span class="pl-1">&nbsp;</span>
+
+                                            {% block selectedActions %}
+                                                <a data-action="delete" data-ids="" style="cursor: pointer;"
+                                                   title="Usuń"
+                                                   data-toggle="tooltip" data-placement="top"
+                                                   class="text-danger js-data-action js-data-selected-action">
+                                                    <i class="fa fa-trash-o"></i>
+                                                </a>
+                                            {% endblock %}
+
+                                            <span class="pl-1">&nbsp;</span>
+                                            (<span class="js-data-selected-count"></span>)
+                                        </td>
+                                    </tr>
+                                {% endblock %}
+
+                            </table>
+
+                            {{ pagerfanta(entities, null, {'prev_message':'panel.nav.prev'|trans, 'next_message':'panel.nav.next'|trans}) }}
+                        {% endblock %}
+                        {% block postTableCardBody %}{% endblock %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            {% block postList %}{% endblock %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript">
+
+        jsdata.init();
+
+        {% if deleteForm %}
+        jsdata.actionHandler(function ($actionElement, $table, ids) {
+            var action = $actionElement.data('action');
+
+            if (action === "delete") {
+                var desc = "";
+                if(ids == "*ALL*") {
+                    desc = "Zostaną usunięte WSZYSTKIE rekordy!";
+                } else {
+                    var idsSplitted = ids.split(',');
+                    desc = "Rekordów do usunięcia: " + idsSplitted.length;
+                }
+                swal({
+                    title: "Usuwanie",
+                    text: desc,
+                    icon: "warning",
+                    dangerMode: true,
+                    buttons: ["Anuluj", "Usuń"],
+                }).then(function (value) {
+                    if (value === true) {
+                        var $deleteForm = $("form[name=deleteForm]");
+                        var $toDeleteIds = $deleteForm.find("#deleteForm_toDeleteIds");
+                        var $redirectTo = $deleteForm.find("#deleteForm_redirectTo");
+                        $toDeleteIds.val(ids);
+                        $redirectTo.val(window.location.href);
+                        $deleteForm.submit();
+                    }
+                });
+            }
+
+        });
+        {% endif %}
+
+    </script>
+{% endblock %}

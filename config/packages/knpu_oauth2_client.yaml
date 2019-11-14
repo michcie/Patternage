@@ -1,0 +1,25 @@
+knpu_oauth2_client:
+    clients:
+        # service: "knpu.oauth2.client.facebook"
+        # KnpU\OAuth2ClientBundle\Client\Provider\FacebookClient
+        facebook:
+            type: facebook
+            client_id: '%env(FACEBOOK_OAUTH_ID)%'
+            client_secret: '%env(FACEBOOK_OAUTH_SECRET)%'
+            redirect_route: auth_login
+            redirect_params:
+               type: facebook
+            graph_api_version: v3.0
+        # service: "knpu.oauth2.client.google"
+        # KnpU\OAuth2ClientBundle\Client\Provider\GoogleClient
+        google:
+            type: google
+            client_id: '%env(GOOGLE_OAUTH_ID)%'
+            client_secret: '%env(GOOGLE_OAUTH_SECRET)%'
+            redirect_route: auth_login
+            redirect_params:
+               type: google
+            # Optional value for additional fields to be requested from the user profile. If set, these values will be included with the defaults. More details: https://developers.google.com/+/web/api/rest/latest/people
+            # user_fields: {}
+        # service: "knpu.oauth2.client.foo_bar_oauth"
+        # an instance of: KnpU\OAuth2ClientBundle\Client\OAuth2Client

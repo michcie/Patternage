@@ -1,0 +1,69 @@
+{% extends "panel/form.html.twig" %}
+{% trans_default_domain "panel" %}
+
+{% block crud_form %}
+    {{ form_start(form) }}
+
+    <div class="row">
+        <div class="form-group col-md-4">
+            <label class="form-control-label">Name</label>
+            {{ form_widget(form.name) }}
+            {{ form_errors(form.name) }}
+        </div>
+        <div class="form-group col-md-4">
+            <label class="form-control-label">Category</label>
+            {{ form_widget(form.category) }}
+            {{ form_errors(form.category) }}
+        </div>
+        <div class="form-group col-md-4">
+            <label class="form-control-label">Price</label>
+            {{ form_widget(form.price) }}
+            {{ form_errors(form.price) }}
+        </div>
+        <div class="form-group col-md-4">
+            <label class="form-control-label">Quantity</label>
+            {{ form_widget(form.quantity) }}
+            {{ form_errors(form.quantity) }}
+        </div>
+
+        <div class="form-group col-md-4">
+            <label class="form-control-label">Producent</label>
+            {{ form_widget(form.producent) }}
+            {{ form_errors(form.producent) }}
+        </div>
+        <div class="form-group col-md-4">
+            <label class="form-control-label">Short Description</label>
+            {{ form_widget(form.description) }}
+            {{ form_errors(form.description) }}
+        </div>
+        <div class="form-group col-md-12">
+            <label class="form-control-label">Product Features</label>
+            {{ form_widget(form.productFeatures) }}
+            {{ form_errors(form.productFeatures) }}
+        </div>
+        <div class="form-group col-md-4">
+            <label class="form-control-label">Recommended</label>
+            {{ form_widget(form.recommendedProduct) }}
+            {{ form_errors(form.recommendedProduct) }}
+        </div>
+
+        <div class="form-group col-md-4">
+            <label class="form-control-label">Small Image</label>
+            {{ form_widget(form.imageFile) }}
+            {{ form_errors(form.imageFile) }}
+        </div>
+        <div class="form-group col-md-4">
+            <label class="form-control-label">Big Image</label>
+            {{ form_widget(form.imageFileBigger) }}
+            {{ form_errors(form.imageFileBigger) }}
+        </div>
+    </div>
+
+    {{ include('panel/crud_form_buttons.html.twig', {createRoute: 'panel_shop_category_create'}) }}
+
+    {{ form_end(form) }}
+{% endblock crud_form %}
+
+{% block scripts %}
+    {{ parent() }}
+{% endblock scripts %}

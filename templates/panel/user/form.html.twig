@@ -1,0 +1,36 @@
+{% extends "panel/form.html.twig" %}
+{% trans_default_domain "panel" %}
+
+{% block crud_form %}
+
+    {{ form_start(form) }}
+    <div class="form-group">
+        <label class="form-control-label">{{ 'panel.form.edit.username'|trans }}</label>
+        {{ form_widget(form.username) }}
+        {{ form_errors(form.username) }}
+    </div>
+
+    <div class="form-group">
+        <label class="form-control-label">{{ 'panel.form.edit.email'|trans }}</label>
+        {{ form_widget(form.email) }}
+        {{ form_errors(form.email) }}
+    </div>
+
+    <div class="form-group">
+        <label class="form-control-label">{{ 'panel.form.edit.pass'|trans }}</label>
+        {{ form_widget(form.plainPassword) }}
+        {{ form_errors(form.plainPassword) }}
+    </div>
+
+
+    {{ include('panel/crud_form_buttons.html.twig') }}
+
+    {{ form_end(form) }}
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript">
+        jsdata.init();
+
+    </script>
+{% endblock %}

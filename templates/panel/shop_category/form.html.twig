@@ -1,0 +1,33 @@
+{% extends "panel/form.html.twig" %}
+{% trans_default_domain "panel" %}
+
+{% block crud_form %}
+    {{ form_start(form) }}
+
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label class="form-control-label">Nazwa</label>
+            {{ form_widget(form.name) }}
+            {{ form_errors(form.name) }}
+        </div>
+        <div class="form-group col-md-6">
+            <label class="form-control-label">Navbar</label>
+            {{ form_widget(form.navbar) }}
+            {{ form_errors(form.navbar) }}
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="form-group">
+        <label class="form-control-label">Nad Kategoria</label>
+        {{ form_widget(form.parent) }}
+        {{ form_errors(form.parent) }}
+    </div>
+
+    {{ include('panel/crud_form_buttons.html.twig', {createRoute: 'panel_shop_category_create'}) }}
+
+    {{ form_end(form) }}
+{% endblock crud_form %}
+
+{% block scripts %}
+    {{ parent() }}
+{% endblock scripts %}

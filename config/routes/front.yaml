@@ -1,0 +1,24 @@
+front_index:
+  path:     /
+  controller: App\Controller\Front\MainController::index
+front_search:
+  path:     /search
+  controller: App\Controller\Front\MainController::search
+front_category:
+  path:     /category/{category}
+  controller: App\Controller\Front\MainController::category
+front_checkout:
+  path:     /checkout
+  controller: App\Controller\Front\MainController::checkout
+addToCart:
+  path:     /addToCart
+  controller: App\Controller\Front\MainController::addToCart
+removeFromCart:
+  path:     /removeFromCart
+  controller: App\Controller\Front\MainController::removeFromCart
+changeAmount:
+  path:     /changeAmount
+  controller: App\Controller\Front\MainController::changeAmount
+product:
+  path:     /product/{id}
+  controller: App\Controller\Front\MainController::product
