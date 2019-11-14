@@ -10,7 +10,7 @@
   "dependencies": {
     "@coreui/coreui": "2.0.2",
     "asset": "symfony/asset",
-    "bootstrap": "4.1.1",
+    "bootstrap": "4.3.1",
     "bootstrap-colorpicker": "^2.5.2",
     "bootstrap-sass": "^3.3.7",
     "emojify.js": "^1.1.0",
